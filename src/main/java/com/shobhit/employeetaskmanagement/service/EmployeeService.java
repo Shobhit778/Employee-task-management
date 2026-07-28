@@ -1,10 +1,12 @@
 package com.shobhit.employeetaskmanagement.service;
 
 import com.shobhit.employeetaskmanagement.entity.Employee;
+import com.shobhit.employeetaskmanagement.exception.ResourceNotFoundException;
 import com.shobhit.employeetaskmanagement.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -24,22 +26,25 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(Long id){
-        return employeeRepository.findById(id).orElse(null);
+        Optional<Employee> employee = employeeRepository.findById(id);
+        if(employee.isPresent()){
+            return employee.get();
+        }
+        throw new ResourceNotFoundException("Employee not found with id" + id);
     }
 
     public Employee updateEmployee(Long id, Employee employee){
-        Employee existingEmployee = employeeRepository.findById(id).orElse(null);
+        Employee existingEmployee = getEmployeeById(id);
 
-        if(existingEmployee != null){
-            existingEmployee.setName(employee.getName());
-            existingEmployee.setEmail(employee.getEmail());
-            existingEmployee.setDepartment(employee.getDepartment());
-            return employeeRepository.save(existingEmployee);
-        }
-        return null;
+        existingEmployee.setName(employee.getName());
+        existingEmployee.setEmail(employee.getEmail());
+        existingEmployee.setDepartment(employee.getDepartment());
+
+        return employeeRepository.save(existingEmployee);
     }
 
     public void deleteEmployee(Long id){
-        employeeRepository.deleteById(id);
+        Employee employee = getEmployeeById(id);
+        employeeRepository.delete(employee);
     }
 }
