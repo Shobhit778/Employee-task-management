@@ -30,7 +30,7 @@ public class EmployeeService {
         if(employee.isPresent()){
             return employee.get();
         }
-        throw new ResourceNotFoundException("Employee not found with id" + id);
+        throw new ResourceNotFoundException("Employee not found with id " + id);
     }
 
     public Employee updateEmployee(Long id, Employee employee){
@@ -43,8 +43,9 @@ public class EmployeeService {
         return employeeRepository.save(existingEmployee);
     }
 
-    public void deleteEmployee(Long id){
+    public String deleteEmployee(Long id){
         Employee employee = getEmployeeById(id);
         employeeRepository.delete(employee);
+        return "Employee deleted successfully";
     }
 }
