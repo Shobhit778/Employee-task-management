@@ -5,19 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.time.LocalDate;
+
 @Entity
-@Table(name = "employee")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employee {
+@Table(name="task")
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    @Column(unique = true, nullable = false)
-    private String email;
-    private String department;
+    private String title;
+    private String description;
+    private String status;
+    private LocalDate dueDate;
+
+    @ManyToOne
+    @JoinColumn(name="employee_id")
+    private Employee employee;
+
 }

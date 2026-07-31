@@ -1,12 +1,11 @@
 package com.shobhit.employeetaskmanagement.controller;
 
+import com.shobhit.employeetaskmanagement.dto.EmployeeRequestDTO;
+import com.shobhit.employeetaskmanagement.dto.EmployeeResponseDTO;
 import com.shobhit.employeetaskmanagement.entity.Employee;
 import com.shobhit.employeetaskmanagement.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/employees")
@@ -18,23 +17,23 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee saveEmployee(@RequestBody Employee employee){
-        return employeeService.saveEmployee(employee);
+    public EmployeeResponseDTO saveEmployee(@RequestBody EmployeeRequestDTO employeeRequestDTO){
+        return employeeService.saveEmployee(employeeRequestDTO);
     }
 
     @GetMapping
-    public List<Employee> getALlEmployees(){
+    public List<EmployeeResponseDTO> getALlEmployees(){
         return employeeService.getAllEmployee();
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Long id){
+    public EmployeeResponseDTO getEmployeeById(@PathVariable Long id){
     return employeeService.getEmployeeById(id);
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
-        return employeeService.updateEmployee(id, employee);
+    public EmployeeResponseDTO updateEmployee(@PathVariable Long id, @RequestBody EmployeeRequestDTO employeeRequestDTO){
+        return employeeService.updateEmployee(id, employeeRequestDTO);
     }
 
     @DeleteMapping("/{id}")
