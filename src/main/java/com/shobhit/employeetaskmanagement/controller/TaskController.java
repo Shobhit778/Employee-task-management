@@ -18,7 +18,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public TaskResponseDTO saveTask(@RequestBody TaskRequestDTO taskRequestDTO){
+    public TaskResponseDTO saveTask(@Valid @RequestBody TaskRequestDTO taskRequestDTO){
         return taskService.saveTask(taskRequestDTO);
     }
 
@@ -33,7 +33,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public TaskResponseDTO updateTask(@PathVariable("id") Long taskId, @RequestBody TaskRequestDTO taskRequestDTO){
+    public TaskResponseDTO updateTask(@PathVariable("id") Long taskId, @Valid @RequestBody TaskRequestDTO taskRequestDTO){
         return taskService.updateTaskById(taskId, taskRequestDTO);
     }
 

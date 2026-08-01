@@ -3,6 +3,7 @@ package com.shobhit.employeetaskmanagement.controller;
 import com.shobhit.employeetaskmanagement.dto.EmployeeRequestDTO;
 import com.shobhit.employeetaskmanagement.dto.EmployeeResponseDTO;
 import com.shobhit.employeetaskmanagement.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public EmployeeResponseDTO saveEmployee(@RequestBody EmployeeRequestDTO employeeRequestDTO){
+    public EmployeeResponseDTO saveEmployee(@Valid @RequestBody EmployeeRequestDTO employeeRequestDTO){
         return employeeService.saveEmployee(employeeRequestDTO);
     }
 
@@ -31,7 +32,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public EmployeeResponseDTO updateEmployee(@PathVariable Long id, @RequestBody EmployeeRequestDTO employeeRequestDTO){
+    public EmployeeResponseDTO updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeRequestDTO employeeRequestDTO){
         return employeeService.updateEmployee(id, employeeRequestDTO);
     }
 
