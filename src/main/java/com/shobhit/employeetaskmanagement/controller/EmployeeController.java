@@ -2,7 +2,6 @@ package com.shobhit.employeetaskmanagement.controller;
 
 import com.shobhit.employeetaskmanagement.dto.EmployeeRequestDTO;
 import com.shobhit.employeetaskmanagement.dto.EmployeeResponseDTO;
-import com.shobhit.employeetaskmanagement.entity.Employee;
 import com.shobhit.employeetaskmanagement.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

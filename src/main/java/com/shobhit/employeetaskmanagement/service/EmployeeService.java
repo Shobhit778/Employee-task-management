@@ -42,7 +42,7 @@ public class EmployeeService {
          return response;
     }
 
-    private Employee findEmployeeById(Long id){
+    public Employee findEmployeeById(Long id){
         Optional<Employee> employee = employeeRepository.findById(id);
         if(employee.isPresent()){
             return employee.get();
